@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     @Modifying
-    @Query("DELETE FROM Rating r WHERE r.member = :member")
+    @Query("DELETE FROM Question q WHERE q.member = :member")
     void deleteByMember(@Param("member") Member member);
 }

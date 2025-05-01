@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface AlarmRepository extends JpaRepository<Alarm, Long> {
 
     @Modifying
-    @Query("DELETE FROM Rating r WHERE r.member = :member")
+    @Query("DELETE FROM Alarm a WHERE a.member = :member")
     void deleteByMember(@Param("member") Member member);
 }
