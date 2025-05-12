@@ -22,7 +22,8 @@ public enum ErrorStatus implements BaseErrorCode {
     NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST, "MEMBER4002", "닉네임은 필수 입니다."),
 
     //test
-    TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트");
+    TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트"),
+    DISCORD_EXCPETION(HttpStatus.INTERNAL_SERVER_ERROR, "DISCORD5000", "DISCORD TEST");
 
 
 

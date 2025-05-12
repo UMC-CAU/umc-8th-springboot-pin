@@ -1,5 +1,6 @@
 package com.example.umc2025.apiPayload;
 
+import com.example.umc2025.apiPayload.Code.BaseCode;
 import com.example.umc2025.apiPayload.Code.status.SuccessStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,10 +25,10 @@ public class ApiResponse<T> {
     public static <T> ApiResponse<T> onSuccess(T result){
         return new ApiResponse<>(true, SuccessStatus._OK.getCode() , SuccessStatus._OK.getMessage(), result);
     }
-//
-//    public static <T> ApiResponse<T> of(BaseCode code, T result){
-//        return new ApiResponse<>(true, code.getReasonHttpStatus().getCode() , code.getReasonHttpStatus().getMessage(), result);
-//    }
+
+    public static <T> ApiResponse<T> of(BaseCode code, T result){
+        return new ApiResponse<>(true, code.getReasonHttpStatus().getCode() , code.getReasonHttpStatus().getMessage(), result);
+    }
 
 
     // 실패한 경우 응답 생성

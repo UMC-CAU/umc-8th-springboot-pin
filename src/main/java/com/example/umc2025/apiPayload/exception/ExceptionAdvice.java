@@ -61,9 +61,15 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = GeneralException.class)
-    public ResponseEntity onThrowException(GeneralException generalException, HttpServletRequest request) {
-        ErrorReasonDTO errorReasonHttpStatus = generalException.getErrorReasonHttpStatus();
-        return handleExceptionInternal(generalException,errorReasonHttpStatus,null,request);
+    public ResponseEntity<Object> onThrowException(GeneralException ex, HttpServletRequest request) {
+        ErrorReasonDTO reason = ex.getErrorReasonHttpStatus();
+
+        // 특정 예외 상태일 때만 디스코드 전송
+        if (ex.getCode() == ErrorStatus.DISCORD_EXCPETION ) {
+            DiscordNotifier.sendErrorLog(request.getRequestURI(), reason.getMessage(), ex);
+        }
+
+        return handleExceptionInternal(ex, reason, null, request);
     }
 
     private ResponseEntity<Object> handleExceptionInternal(Exception e, ErrorReasonDTO reason,
@@ -117,4 +123,10 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
                 request
         );
     }
+
+    private boolean isProductionProfile() {
+        String profile = System.getProperty("spring.profiles.active", "local");
+        return profile.equals("dev") || profile.equals("prod");
+    }
+
 }

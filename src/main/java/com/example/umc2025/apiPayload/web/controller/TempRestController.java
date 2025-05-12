@@ -2,6 +2,8 @@ package com.example.umc2025.apiPayload.web.controller;
 
 
 import com.example.umc2025.apiPayload.ApiResponse;
+import com.example.umc2025.apiPayload.Code.status.ErrorStatus;
+import com.example.umc2025.apiPayload.exception.GeneralException;
 import com.example.umc2025.apiPayload.web.dto.TempConverter;
 import com.example.umc2025.apiPayload.web.dto.TempResponse;
 import com.example.umc2025.service.tempService.TempQueryService;
@@ -27,6 +29,12 @@ public class TempRestController {
     @GetMapping("/exception")
     public ApiResponse<TempResponse.TempExceptionDTO> exceptionAPI(@RequestParam Integer flag){
 
-        return null;
+        tempQueryService.CheckFlag(flag);
+        return ApiResponse.onSuccess(TempConverter.toTempExceptionDTO(flag));
+    }
+
+    @GetMapping("/test-error")
+    public void testError() {
+        throw new GeneralException(ErrorStatus.DISCORD_EXCPETION);
     }
 }
