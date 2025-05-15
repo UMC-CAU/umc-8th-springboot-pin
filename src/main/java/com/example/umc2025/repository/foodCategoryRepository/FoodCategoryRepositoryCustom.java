@@ -5,6 +5,5 @@ import com.example.umc2025.web.dto.MemberRequestDTO;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface FoodCategoryRepositoryCustom {
-    @Transactional
-    Member joinMember(MemberRequestDTO.JoinDto request);
+
 }
