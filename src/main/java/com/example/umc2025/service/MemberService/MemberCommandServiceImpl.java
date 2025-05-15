@@ -1,4 +1,4 @@
-package com.example.umc2025.repository.foodCategoryRepository;
+package com.example.umc2025.service.MemberService;
 
 import com.example.umc2025.apiPayload.Code.status.ErrorStatus;
 import com.example.umc2025.apiPayload.exception.handler.FoodCategoryHandler;
@@ -6,19 +6,20 @@ import com.example.umc2025.domain.FoodCategory;
 import com.example.umc2025.domain.Member;
 import com.example.umc2025.domain.mapping.MemberPrefer;
 import com.example.umc2025.repository.MemberRepository;
+import com.example.umc2025.repository.foodCategoryRepository.FoodCategoryRepository;
 import com.example.umc2025.web.converter.MemberConverter;
 import com.example.umc2025.web.converter.MemberPreferConverter;
 import com.example.umc2025.web.dto.MemberRequestDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Repository
+@Service
 @RequiredArgsConstructor
-public class FoodCategoryRepositoryImpl implements FoodCategoryRepositoryCustom {
+public class MemberCommandServiceImpl implements MemberCommandService {
 
     private final MemberRepository memberRepository;
     private final FoodCategoryRepository foodCategoryRepository;
@@ -26,7 +27,9 @@ public class FoodCategoryRepositoryImpl implements FoodCategoryRepositoryCustom 
     @Override
     @Transactional
     public Member joinMember(MemberRequestDTO.JoinDto request) {
+
         Member newMember = MemberConverter.toMember(request);
+
         List<FoodCategory> foodCategoryList = request.getPreferCategory().stream()
                 .map(category -> {
                     return foodCategoryRepository.findById(category).orElseThrow(() -> new FoodCategoryHandler(ErrorStatus.FOOD_CATEGORY_NOT_FOUND));

@@ -1,6 +1,9 @@
 package com.example.umc2025.web.controller;
 
 import com.example.umc2025.apiPayload.ApiResponse;
+import com.example.umc2025.domain.Member;
+import com.example.umc2025.service.MemberService.MemberCommandService;
+import com.example.umc2025.web.converter.MemberConverter;
 import com.example.umc2025.web.dto.MemberRequestDTO;
 import com.example.umc2025.web.dto.MemberResponseDTO;
 import jakarta.validation.Valid;
@@ -19,6 +22,7 @@ public class MemberRestController {
 
     @PostMapping("/")
     public ApiResponse<MemberResponseDTO.JoinResultDTO> join(@RequestBody @Valid MemberRequestDTO.JoinDto request) {
-        return null;
+        Member member = memberCommandService.joinMember(request);
+        return ApiResponse.onSuccess(MemberConverter.toJoinResultDTO(member));
     }
 }

@@ -1,4 +1,4 @@
-package com.example.umc2025.service;
+package com.example.umc2025.service.MemberService;
 
 import com.example.umc2025.domain.Member;
 import com.example.umc2025.repository.AlarmRepository;
@@ -29,4 +29,6 @@ public class MemberService {
         questionRepository.deleteByMember(member);
         alarmRepository.deleteByMember(member);
     }
+
+
 }
