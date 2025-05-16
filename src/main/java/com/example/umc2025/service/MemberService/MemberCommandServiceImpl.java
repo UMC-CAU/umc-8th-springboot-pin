@@ -2,6 +2,7 @@ package com.example.umc2025.service.MemberService;
 
 import com.example.umc2025.apiPayload.Code.status.ErrorStatus;
 import com.example.umc2025.apiPayload.exception.handler.FoodCategoryHandler;
+import com.example.umc2025.apiPayload.exception.handler.MemberHandler;
 import com.example.umc2025.domain.FoodCategory;
 import com.example.umc2025.domain.Member;
 import com.example.umc2025.domain.mapping.MemberPrefer;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,5 +42,10 @@ public class MemberCommandServiceImpl implements MemberCommandService {
         memberPreferList.forEach(memberPrefer -> {memberPrefer.setMember(newMember);});
 
         return memberRepository.save(newMember);
+    }
+
+    @Override
+    public Member findById(Long id) {
+        return memberRepository.findById(id).orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
     }
 }

@@ -30,14 +30,12 @@ public class RatingServiceImpl implements RatingService{
 
         Rating newRating = RatingConverter.toRating(request);
 
-        Optional<Store> store = storeQueryService.findStore(request.getStoreId());
-        Store storeValue = store.orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
+        Store store = storeQueryService.findStore(request.getStoreId());
 
-        Optional<Member> member = memberComandService.findById(request.getMemberId());
-        Member memberValue = member.orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
+        Member member = memberComandService.findById(request.getMemberId());
 
-        newRating.setStore(storeValue);
-        newRating.setMember(memberValue);
+        newRating.setStore(store);
+        newRating.setMember(member);
 
         return newRating;
     }
