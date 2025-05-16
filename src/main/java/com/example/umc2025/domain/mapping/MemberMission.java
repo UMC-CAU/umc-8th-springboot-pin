@@ -27,4 +27,9 @@ public class MemberMission {
     @ManyToOne(fetch = FetchType.LAZY)
     private Mission mission;
 
+    public MemberMission( Member member, Mission mission) {
+        this.status = MissionStatus.TRYING;
+        this.member = member;
+        this.mission = mission;
+    }
 }

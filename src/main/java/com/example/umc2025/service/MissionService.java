@@ -1,6 +1,7 @@
 package com.example.umc2025.service;
 
 import com.example.umc2025.apiPayload.Code.status.ErrorStatus;
+import com.example.umc2025.apiPayload.exception.handler.MissionHandler;
 import com.example.umc2025.apiPayload.exception.handler.StoreHandler;
 import com.example.umc2025.domain.Mission;
 import com.example.umc2025.domain.Store;
@@ -21,6 +22,7 @@ import java.util.Optional;
 public class MissionService {
 
     private final StoreQueryService storeQueryService;
+    private final MissionRepository missionRepository;
 
     @Transactional
     public Mission addMission(MissionDTO.AddDTO dto) {
@@ -32,5 +34,9 @@ public class MissionService {
         newMission.setStore(storeValue);
 
         return newMission;
+    }
+
+    public Mission findById(Long id) {
+        return missionRepository.findById(id).orElseThrow(() -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND));
     }
 }

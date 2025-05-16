@@ -1,5 +1,7 @@
 package com.example.umc2025.service.MemberService;
 
+import com.example.umc2025.apiPayload.Code.status.ErrorStatus;
+import com.example.umc2025.apiPayload.exception.handler.MemberHandler;
 import com.example.umc2025.domain.Member;
 import com.example.umc2025.repository.AlarmRepository;
 import com.example.umc2025.repository.MemberRepository;
@@ -21,7 +23,7 @@ public class MemberService {
 
     @Transactional
     public void removeMemberInfo(Long memberId) {
-        Member member = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 맴버 입니다."));
+        Member member = findById(memberId);
 
         member.removeMember();
 
@@ -30,5 +32,8 @@ public class MemberService {
         alarmRepository.deleteByMember(member);
     }
 
-
+    public Member findById(Long memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
+        return member;
+    }
 }
