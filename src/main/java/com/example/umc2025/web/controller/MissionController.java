@@ -8,17 +8,17 @@ import com.example.umc2025.web.dto.MissionDTO;
 import com.example.umc2025.web.dto.MissionResponseDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/mission")
+@RequestMapping("/missions")
 @RequiredArgsConstructor
 public class MissionController {
 
     private final MissionService missionService;
 
+    @PostMapping("/add")
     public ApiResponse<MissionResponseDTO.AddMissionResultDTO> addMission(@RequestBody @Valid MissionDTO.AddDTO dto) {
         Mission mission = missionService.addMission(dto);
         return ApiResponse.onSuccess(MissionConverter.toResultDTO(mission));

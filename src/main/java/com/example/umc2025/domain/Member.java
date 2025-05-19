@@ -23,6 +23,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@EqualsAndHashCode(of = "id", callSuper = false)
 public class Member extends BaseEntity {
 
     @Id

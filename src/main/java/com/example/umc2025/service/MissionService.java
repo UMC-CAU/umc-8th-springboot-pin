@@ -28,10 +28,10 @@ public class MissionService {
     public Mission addMission(MissionDTO.AddDTO dto) {
         Mission newMission = MissionConverter.toMission(dto);
 
-        Optional<Store> store = storeQueryService.findStore(dto.getStoreId());
+        Store store = storeQueryService.findStore(dto.getStoreId());
 
-        Store storeValue = store.orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
-        newMission.setStore(storeValue);
+        newMission.setStore(store);
+        missionRepository.save(newMission);
 
         return newMission;
     }

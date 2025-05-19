@@ -37,10 +37,11 @@ public class MemberMissionServiceImpl implements MemberMissionService {
         }
 
         MemberMission memberMission = new MemberMission(member, mission);
+        memberMission.setMission(mission);
+        memberMission.setMember(member);
+
         memberMissionRepository.save(memberMission);
-        //연관관계 관련 추가
-        member.getMemberMissionList().add(memberMission);
-        mission.getMemberMission().add(memberMission);
+
         return memberMission;
     }
 }

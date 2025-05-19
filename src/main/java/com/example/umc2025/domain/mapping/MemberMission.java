@@ -32,4 +32,18 @@ public class MemberMission {
         this.member = member;
         this.mission = mission;
     }
+
+    public void setMember(Member member) {
+        this.member = member;
+        if (!member.getMemberMissionList().contains(this) && member != null) {
+            member.getMemberMissionList().add(this);
+        }
+    }
+
+    public void setMission(Mission mission) {
+        this.mission = mission;
+        if (!mission.getMemberMission().contains(this) && mission != null) {
+            mission.getMemberMission().add(this);
+        }
+    }
 }
