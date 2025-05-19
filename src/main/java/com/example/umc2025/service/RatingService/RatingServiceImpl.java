@@ -2,6 +2,8 @@ package com.example.umc2025.service.RatingService;
 
 import com.example.umc2025.apiPayload.Code.status.ErrorStatus;
 import com.example.umc2025.apiPayload.exception.handler.MemberHandler;
+import com.example.umc2025.apiPayload.exception.handler.MissionHandler;
+import com.example.umc2025.apiPayload.exception.handler.RatingHandler;
 import com.example.umc2025.apiPayload.exception.handler.StoreHandler;
 import com.example.umc2025.domain.Member;
 import com.example.umc2025.domain.Rating;
@@ -35,6 +37,10 @@ public class RatingServiceImpl implements RatingService{
         Store store = storeQueryService.findStore(request.getStoreId());
 
         Member member = memberComandService.findById(request.getMemberId());
+
+        if (ratingRepository.existsByMemberIdAndStoreId(member.getId(), store.getId())) {
+            throw new RatingHandler(ErrorStatus.DUPLICATE_RATING);
+        }
 
         newRating.setStore(store);
         newRating.setMember(member);

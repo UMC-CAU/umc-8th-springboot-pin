@@ -6,11 +6,15 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 public class RatingRequestDTO {
 
     @Getter
+    @Setter
+    @NoArgsConstructor
     public static class CreateRating {
         @NotNull
         @Min(0)

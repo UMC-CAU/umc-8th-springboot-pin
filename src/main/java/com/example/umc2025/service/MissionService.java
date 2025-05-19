@@ -11,6 +11,7 @@ import com.example.umc2025.service.StoreService.StoreQueryService;
 import com.example.umc2025.web.converter.MissionConverter;
 import com.example.umc2025.web.dto.MissionDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +30,11 @@ public class MissionService {
         Mission newMission = MissionConverter.toMission(dto);
 
         Store store = storeQueryService.findStore(dto.getStoreId());
+
+        if (missionRepository.existsByStoreIdAndMissionName(dto.getStoreId(), dto.getMissionName())) {
+            throw new MissionHandler(ErrorStatus.DUPLICATE_MISSION);
+        }
+
 
         newMission.setStore(store);
         missionRepository.save(newMission);
