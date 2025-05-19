@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExistMember {
 
-    String message() default "존재하지 않는 스토어입니다.";
+    String message() default "존재하지 않는 Member입니다.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
