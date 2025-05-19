@@ -32,9 +32,9 @@ public class Member extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
+
     @Column(nullable = false, length = 20)
     private String name;
-
     @Column(nullable = false, length = 40)
     private String address;
 
@@ -49,7 +49,7 @@ public class Member extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 10)
-    @ColumnDefault("ACTIVE")
+    @ColumnDefault("'ACTIVE'")
     private MemberStatus status;
 
     private LocalDate inactiveDate;
