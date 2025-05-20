@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/memberMission")
+@RequestMapping("/memberMissions")
 @RequiredArgsConstructor
 public class MemberMissionController {
 

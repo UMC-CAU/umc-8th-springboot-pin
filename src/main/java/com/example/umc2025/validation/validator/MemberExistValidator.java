@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class MemberExistValidator implements ConstraintValidator<ExistMember, List<Long>> {
+public class MemberExistValidator implements ConstraintValidator<ExistMember, Long> {
 
     private final MemberRepository memberRepository;
     @Override
@@ -21,17 +21,33 @@ public class MemberExistValidator implements ConstraintValidator<ExistMember, Li
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
+//    @Override
+//    public boolean isValid(List<Long> values, ConstraintValidatorContext context) {
+//        boolean isValid = values.stream()
+//                .allMatch(value -> memberRepository.existsById(value));
+//
+//        if (!isValid) {
+//            context.disableDefaultConstraintViolation();
+//            context.buildConstraintViolationWithTemplate(ErrorStatus.MEMBER_NOT_FOUND.toString()).addConstraintViolation();
+//
+//        }
+//
+//        return false;
+//    }
+
     @Override
-    public boolean isValid(List<Long> values, ConstraintValidatorContext context) {
-        boolean isValid = values.stream()
-                .allMatch(value -> memberRepository.existsById(value));
+    public boolean isValid(Long value, ConstraintValidatorContext context) {
+        // null은 다른 어노테이션 (@NotNull)로 처리하도록 허용
+        if (value == null) return true;
 
-        if (!isValid) {
+        boolean exists = memberRepository.existsById(value);
+
+        if (!exists) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(ErrorStatus.MEMBER_NOT_FOUND.toString()).addConstraintViolation();
-
+            context.buildConstraintViolationWithTemplate("존재하지 않는 회원입니다.")
+                    .addConstraintViolation();
         }
 
-        return false;
+        return exists;
     }
 }

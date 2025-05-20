@@ -22,6 +22,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class RatingServiceImpl implements RatingService{
 
     private final StoreQueryService storeQueryService;
