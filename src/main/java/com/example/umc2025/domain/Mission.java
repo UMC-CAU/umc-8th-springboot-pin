@@ -15,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(of = "id", callSuper = false)
 public class Mission extends BaseEntity {
 
     @Id

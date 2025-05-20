@@ -10,6 +10,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@EqualsAndHashCode(of = "id", callSuper = false)
 public class Rating extends BaseEntity {
 
 

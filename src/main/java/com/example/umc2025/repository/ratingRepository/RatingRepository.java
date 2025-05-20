@@ -17,6 +17,8 @@ public interface RatingRepository extends JpaRepository<Rating, Long>, RatingRep
 
     Page<Rating> findAllByMember(Member member, PageRequest pageRequest);
 
+    boolean existsByMemberIdAndStoreId(Long memberId, Long storeId);
+
     @Modifying
     @Query("DELETE FROM Rating r WHERE r.member = :member")
     void deleteByMember(@Param("member") Member member);

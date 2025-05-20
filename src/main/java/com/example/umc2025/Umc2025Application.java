@@ -1,13 +1,19 @@
 package com.example.umc2025;
 
+import com.example.umc2025.domain.Member;
+import com.example.umc2025.repository.MemberRepository;
 import com.example.umc2025.service.StoreService.StoreQueryService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
+@EntityScan(basePackages = {"com.example.umc2025.domain"})
 public class Umc2025Application {
 
     public static void main(String[] args) {
