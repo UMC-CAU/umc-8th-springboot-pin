@@ -11,5 +11,6 @@ public interface MissionRepository extends JpaRepository<Mission, Long>, Mission
 
     Page<Mission> findAllByStore(Store store, PageRequest request);
 
+    boolean existsByStoreIdAndMissionName(Long storeId, String name);
 
 }
