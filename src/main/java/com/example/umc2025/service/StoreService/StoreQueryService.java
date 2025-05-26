@@ -10,11 +10,14 @@ import java.util.Optional;
 
 public interface StoreQueryService {
 
-    Optional<Store> findStore(Long id);
+    Store findStore(Long id);
     List<Store> findStoresByNameAndScore(String name, Float score);
 
 
     Page<Rating> getRatingList(Long StoreId, Integer page);
 
     Page<Mission> getMissionList(Long storeId, Integer page);
+
+
+
 }

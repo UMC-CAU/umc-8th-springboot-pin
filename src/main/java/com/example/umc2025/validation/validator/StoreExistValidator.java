@@ -8,13 +8,11 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-
 import java.util.List;
-
 
 @Component
 @RequiredArgsConstructor
-public class StoreExistValidator implements ConstraintValidator<ExistStore, List<Long>> {
+public class StoreExistValidator implements ConstraintValidator<ExistStore, Long> {
 
     private final StoreRepository storeRepository;
 
@@ -24,16 +22,19 @@ public class StoreExistValidator implements ConstraintValidator<ExistStore, List
     }
 
     @Override
-    public boolean isValid(List<Long> values, ConstraintValidatorContext context) {
+    public boolean isValid(Long values, ConstraintValidatorContext context) {
 
-        boolean isValid = values.stream()
-                .allMatch(value -> storeRepository.existsById(value));
+        // null은 다른 어노테이션 (@NotNull)로 처리하도록 허용
+        if (values == null) return true;
+
+        boolean isValid = storeRepository.existsById(values);
 
         if (!isValid) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(ErrorStatus.STORE_NOT_FOUND.toString()).addConstraintViolation();
+
         }
 
-        return false;
+        return isValid;
     }
 }

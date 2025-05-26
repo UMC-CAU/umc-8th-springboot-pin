@@ -1,5 +1,7 @@
 package com.example.umc2025.service.StoreService;
 
+import com.example.umc2025.apiPayload.Code.status.ErrorStatus;
+import com.example.umc2025.apiPayload.exception.handler.StoreHandler;
 import com.example.umc2025.domain.Mission;
 import com.example.umc2025.domain.Rating;
 import com.example.umc2025.domain.Store;
@@ -9,6 +11,7 @@ import com.example.umc2025.repository.ratingRepository.RatingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,8 +28,8 @@ public class StoreQueryServiceImpl implements StoreQueryService {
     private final MissionRepository missionRepository;
 
     @Override
-    public Optional<Store> findStore(Long id) {
-        return storeRepository.findById(id);
+    public Store findStore(Long id) {
+        return storeRepository.findById(id).orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
     }
 
     @Override
