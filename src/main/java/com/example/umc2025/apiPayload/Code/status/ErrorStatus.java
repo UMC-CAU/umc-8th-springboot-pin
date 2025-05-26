@@ -23,7 +23,13 @@ public enum ErrorStatus implements BaseErrorCode {
 
     //test
     TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트"),
-    DISCORD_EXCPETION(HttpStatus.INTERNAL_SERVER_ERROR, "DISCORD5000", "DISCORD TEST");
+    DISCORD_EXCPETION(HttpStatus.INTERNAL_SERVER_ERROR, "DISCORD5000", "DISCORD TEST"),
+
+    //Store
+    STORE_NOT_FOUND(HttpStatus.NOT_FOUND, "STORE4001", "존재하지 않는 스토어인니다"),
+
+    //page
+    PAGE_NUMBER_ERROR(HttpStatus.BAD_REQUEST, "PAGE4001", "잘못된 페이지 요청입니다");
 
 
 
