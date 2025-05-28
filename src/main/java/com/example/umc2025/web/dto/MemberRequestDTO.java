@@ -1,6 +1,7 @@
 package com.example.umc2025.web.dto;
 
 import com.example.umc2025.validation.annotation.ExistCategory;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -16,6 +17,8 @@ public class MemberRequestDTO {
         String name;
         @NotNull
         Integer gender;
+        @NotBlank
+        String password;
         @NotNull
         Integer birthYear;
         @NotNull
@@ -28,5 +31,7 @@ public class MemberRequestDTO {
         String specAddress;
         @ExistCategory
         List<Long> preferCategory;
+        @Email
+        String eamil;
     }
 }

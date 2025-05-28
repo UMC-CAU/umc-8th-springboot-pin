@@ -3,6 +3,7 @@ package com.example.umc2025.web.converter;
 import com.example.umc2025.domain.Member;
 import com.example.umc2025.domain.Rating;
 import com.example.umc2025.domain.enums.Gender;
+import com.example.umc2025.domain.enums.Role;
 import com.example.umc2025.domain.mapping.MemberMission;
 import com.example.umc2025.web.dto.MemberRequestDTO;
 import com.example.umc2025.web.dto.MemberResponseDTO;
@@ -44,6 +45,9 @@ public class MemberConverter {
                 .gender(gender)
                 .name(request.getName())
                 .memberPreferList(new ArrayList<>())
+                .email(request.getEamil())
+                .role(Role.USER)
+                .password(request.getPassword())
                 .build();
     }
 
