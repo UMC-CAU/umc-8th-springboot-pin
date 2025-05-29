@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import javax.security.auth.login.LoginException;
 import java.security.Key;
 import java.util.Collections;
 import java.util.Date;
@@ -83,5 +84,18 @@ public class JwtTokenProvider {
             throw new MemberHandler(ErrorStatus.INVALID_TOKEN);
         }
         return getAuthentication(accessToken);
+    }
+
+    public String extractMemberId(final String token) {
+        try {
+            return Jwts.parser()
+                    .setSigningKey(getSigningKey())
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .get("memberId")
+                    .toString();
+        } catch (final Exception error) {
+            throw new RuntimeException("INVALID_ACCESS_TOKEN");
+        }
     }
 }

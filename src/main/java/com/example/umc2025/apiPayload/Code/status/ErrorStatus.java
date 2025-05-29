@@ -45,7 +45,8 @@ public enum ErrorStatus implements BaseErrorCode {
 
     //jet
     INVALID_TOKEN(HttpStatus.BAD_REQUEST, "JWT4001", "INVALID_TOKEN"),
-    INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "JWT4002", "잘못된  비밀번호입니다.");
+    INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "JWT4002", "잘못된  비밀번호입니다."),
+    NOT_FOUND_GOOGLE_ACCESS_TOKEN_RESPONSE(HttpStatus.NOT_FOUND, "JWT4003", "구글 클라이언트로부터 데이터를 불러오지 못했습니다");
 
 
 
