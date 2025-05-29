@@ -27,4 +27,23 @@ public class MemberMission {
     @ManyToOne(fetch = FetchType.LAZY)
     private Mission mission;
 
+    public MemberMission( Member member, Mission mission) {
+        this.status = MissionStatus.TRYING;
+        this.member = member;
+        this.mission = mission;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+        if (!member.getMemberMissionList().contains(this) && member != null) {
+            member.getMemberMissionList().add(this);
+        }
+    }
+
+    public void setMission(Mission mission) {
+        this.mission = mission;
+        if (mission != null && !mission.getMemberMission().contains(this)) {
+            mission.getMemberMission().add(this);
+        }
+    }
 }
