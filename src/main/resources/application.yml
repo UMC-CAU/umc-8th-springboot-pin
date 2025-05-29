@@ -1,4 +1,7 @@
 spring:
+  config:
+    import:
+      - jwt.yml
   datasource:
     url: jdbc:mysql://localhost:3306/umc2
     username: root

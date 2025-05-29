@@ -35,7 +35,7 @@ public class MemberViewController {
     public String joinMember(@Valid @ModelAttribute("memberJoinDto") MemberRequestDTO.JoinDto request, // 협업시에는 기존 RequestBody 어노테이션을 붙여주시면 됩니다!
                              BindingResult bindingResult,
                              Model model) {
-        log.info(request.getGender().toString());
+        log.info("Form submitted: {}", request); // DTO 전체 로그
 
         if (bindingResult.hasErrors()) {
             // 뷰에 데이터 바인딩이 실패할 경우 signup 페이지를 유지합니다.

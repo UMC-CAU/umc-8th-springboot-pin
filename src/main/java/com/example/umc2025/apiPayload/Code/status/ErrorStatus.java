@@ -41,7 +41,11 @@ public enum ErrorStatus implements BaseErrorCode {
     PAGE_NUMBER_ERROR(HttpStatus.BAD_REQUEST, "PAGE4001", "잘못된 페이지 요청입니다."),
     //test
     TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트"),
-    DISCORD_EXCPETION(HttpStatus.INTERNAL_SERVER_ERROR, "DISCORD5000", "DISCORD TEST");
+    DISCORD_EXCPETION(HttpStatus.INTERNAL_SERVER_ERROR, "DISCORD5000", "DISCORD TEST"),
+
+    //jet
+    INVALID_TOKEN(HttpStatus.BAD_REQUEST, "JWT4001", "INVALID_TOKEN"),
+    INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "JWT4002", "잘못된  비밀번호입니다.");
 
 
 
