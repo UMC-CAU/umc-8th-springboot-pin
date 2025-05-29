@@ -42,7 +42,7 @@ public class MemberMission {
 
     public void setMission(Mission mission) {
         this.mission = mission;
-        if (!mission.getMemberMission().contains(this) && mission != null) {
+        if (mission != null && !mission.getMemberMission().contains(this)) {
             mission.getMemberMission().add(this);
         }
     }
