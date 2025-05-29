@@ -25,28 +25,28 @@ public class MemberConverter {
 
     public static Member toMember(MemberRequestDTO.JoinDto request){
 
-        Gender gender = null;
+        Gender genders = null;
 
         switch (request.getGender()){
             case 1:
-                gender = Gender.MALE;
+                genders = Gender.MALE;
                 break;
             case 2:
-                gender = Gender.FEMALE;
+                genders = Gender.FEMALE;
                 break;
             case 3:
-                gender = Gender.NONE;
+                genders = Gender.NONE;
                 break;
         }
 
         return Member.builder()
                 .address(request.getAddress())
                 .specAddress(request.getSpecAddress())
-                .gender(gender)
+                .gender(genders)
                 .name(request.getName())
                 .memberPreferList(new ArrayList<>())
-                .email(request.getEamil())
-                .role(Role.USER)
+                .email(request.getEmail())
+                .role(request.getRole())
                 .password(request.getPassword())
                 .build();
     }
