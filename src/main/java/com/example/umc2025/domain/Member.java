@@ -32,7 +32,6 @@ public class Member extends BaseEntity {
     private Long id;
 
     @Column(nullable = false)
-    @NotBlank
     private String password;
 
 

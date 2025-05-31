@@ -2,6 +2,8 @@ package com.example.umc2025.web.controller;
 
 import com.example.umc2025.apiPayload.ApiResponse;
 import com.example.umc2025.service.MemberService.MemberCommandService;
+import com.example.umc2025.service.MemberService.MemberLoginService;
+import com.example.umc2025.service.MemberService.MemberLoginServiceImpl;
 import com.example.umc2025.web.dto.MemberRequestDTO;
 import com.example.umc2025.web.dto.MemberResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,12 +24,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginRestController {
 
     private final MemberCommandService memberCommandService;
+    private final MemberLoginService memberLoginService;
 
     @PostMapping("/login")
     @Operation(summary = "유저 로그인 API",description = "유저가 로그인하는 API입니다.")
     public ApiResponse<MemberResponseDTO.LoginResultDTO> login(@RequestBody @Valid MemberRequestDTO.LoginRequestDTO request) {
-        log.info("lgon");
         return ApiResponse.onSuccess(memberCommandService.loginMember(request));
+    }
+
+    @PostMapping("/login/google")
+    @Operation(summary = "유저 로그인 API with google",description = "유저가 google 계정으로 로그인하는 API입니다.")
+    public ApiResponse<MemberResponseDTO.LoginResultDTO> loginWithGoogle(@RequestBody @Valid MemberRequestDTO.LoginRequestByGoogleDTO request) {
+        return ApiResponse.onSuccess(memberLoginService.oauthLoginGoogle(request.getCode()));
     }
 
     @GetMapping("/info")

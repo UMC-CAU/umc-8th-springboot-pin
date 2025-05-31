@@ -73,5 +73,4 @@ public class GoogleClient {
         return restTemplate.exchange(profileUrl, HttpMethod.GET, httpEntity, GoogleAccountProfileResponse.class)
                 .getBody();
     }
-
 }
