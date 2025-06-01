@@ -1,0 +1,15 @@
+jwt:
+  token:
+    secretKey: umceightfightingjwttokenauthentication
+    expiration:
+      access: 14400000
+
+
+google:
+  client-id: 1042522196660-d77csav9novqjnbqhqd1k39vgugpusdk.apps.googleusercontent.com
+  client-secret: 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
+  redirect-uri: http://localhost:8080/login/oauth2/google
+  authorization-grant-type: authorization_code
+  url:
+    access-token: https://oauth2.googleapis.com/token
+    profile: https://www.googleapis.com/oauth2/v2/userinfo

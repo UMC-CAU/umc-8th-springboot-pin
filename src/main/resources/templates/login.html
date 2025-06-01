@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <script>
+        const GOOGLE_CLIENT_ID = [[${googleClientId}]];
+    </script>
+</head>
+<body>
+<h2>Login</h2>
+<form th:action="@{/login}" method="post">
+    <div>
+        <label for="username">Email:</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Login</button>
+</form>
+
+<p th:if="${param.error}">사용자 이름 또는 비밀번호가 잘못되었습니다.</p>
+<p th:if="${param.logout}">로그아웃되었습니다.</p>
+
+<!-- 회원가입 링크 수정 -->
+<p>계정이 없나요? <a th:href="@{/signup}">Sign up</a></p>
+
+<button onclick="redirectToGoogle()">Login with Google</button>
+
+<script>
+    function redirectToGoogle() {
+        const clientId = [[${googleClientId}]]; // 클라이언트 ID로 교체
+        const redirectUri = 'http://localhost:8080/oauth2/callback/google'; // 백엔드에서 설정한 redirect_uri
+        const scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile';
+
+        const googleOAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code`
+            + `&client_id=${clientId}`
+            + `&redirect_uri=${encodeURIComponent(redirectUri)}`
+            + `&scope=${encodeURIComponent(scope)}`
+            + `&access_type=offline`
+            + `&prompt=consent`;
+
+        window.location.href = googleOAuthUrl;
+    }
+
+    // ✅ 리디렉션 된 후 URL에 ?code=가 있을 때 백엔드로 전달
+    window.onload = function () {
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        if (code) {
+            fetch('/login/google', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ code: code })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Login Success!\nAccessToken: ' + data.result.accessToken);
+                    // TODO: 토큰 저장 후 페이지 이동 등 처리
+                })
+                .catch(error => {
+                    alert('Login failed');
+                    console.error(error);
+                });
+        }
+    };
+</script>
+</body>
+</html>

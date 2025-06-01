@@ -10,6 +10,8 @@ import com.example.umc2025.domain.mapping.MemberAgree;
 import com.example.umc2025.domain.mapping.MemberMission;
 import com.example.umc2025.domain.mapping.MemberPrefer;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -54,6 +56,7 @@ public class Member extends BaseEntity {
 
     private LocalDate inactiveDate;
 
+    @Email
     @Column(nullable = false, length = 50)
     private String email;
 
@@ -92,6 +95,10 @@ public class Member extends BaseEntity {
         this.memberMissionList.clear();
 
         // 나머지 orphanRemoval = false 관계는 직접 delete query로 제거
+    }
+
+    public void encodePassword(String password) {
+        this.password = password;
     }
 
 }
