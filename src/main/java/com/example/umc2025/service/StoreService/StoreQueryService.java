@@ -13,8 +13,11 @@ public interface StoreQueryService {
     Store findStore(Long id);
     List<Store> findStoresByNameAndScore(String name, Float score);
 
-    Page<Rating> getRatingList(Long id, Integer page);
+
+    Page<Rating> getRatingList(Long StoreId, Integer page);
 
     Page<Mission> getMissionList(Long storeId, Integer page);
+
+
 
 }
